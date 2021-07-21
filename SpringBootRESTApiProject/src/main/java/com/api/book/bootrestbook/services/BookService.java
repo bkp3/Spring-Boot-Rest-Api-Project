@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.api.book.bootrestbook.entities.Book;
 
@@ -50,6 +53,19 @@ public class BookService {
 			}
 		}).collect(Collectors.toList());
 
+	}
+	
+	// update the book
+	public void updateBook(Book book, int bookId) {
+		
+		list = list.stream().map(b -> {
+			if(b.getId()==bookId) {
+				b.setTitle(book.getTitle());
+				b.setAuthor(book.getAuthor());
+			}
+			return b;
+		}).collect(Collectors.toList());
+		
 	}
 
 }
